@@ -13,6 +13,7 @@ function openPhonepeExpressbuy(ppeUrl, handleResponse, handleError) {
         url: ppeUrl,
     };
     var paymentRequestPhonepe = createPhonepePaymentRequest(data);
+    if(paymentRequestPhonepe == null) return;
     paymentRequestPhonepe.show().then(handlePaymentResponse).catch(handleError);
 }
 
