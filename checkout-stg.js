@@ -42,8 +42,6 @@ async function warmupAndSaveResults(paymentRequestContext) {
     if(userOperatingSystem == "Android")
         isAndroid = true;
 
-    sessionStorage.setItem('constraints', paymentRequestContext.constraints);
-
     var data = {
         url: "ppe://expressbuy",
         constraints : paymentRequestContext.constraints
