@@ -32,7 +32,6 @@ async function getExpressbuyResults(paymentRequestContext){
 }
 
 async function warmupAndSaveResults(paymentRequestContext) {
-    if(sessionStorage.getItem('eligibility') != null) return;
     var userOperatingSystem = navigator.userAgentData.platform;
     var network = navigator.connection.effectiveType;
     var isAndroid = false;
@@ -40,7 +39,6 @@ async function warmupAndSaveResults(paymentRequestContext) {
     var canMakePayment = false;
     var hasEnrolledInstrument = false;
     var retries = sessionStorage.getItem('hasEnrolledInstrumentRetries') ?? 0;
-    var eligibility = false;
     if(userOperatingSystem == "Android")
         isAndroid = true;
 
@@ -68,9 +66,8 @@ async function warmupAndSaveResults(paymentRequestContext) {
         endTime = performance.now();
         var elapsedTime = endTime - startTime;
     }
-    eligibility = isAndroid && paymentRequestSupported && canMakePayment && hasEnrolledInstrument;
     sessionStorage.setItem('hasEnrolledInstrumentRetries', retries);
-    sessionStorage.setItem('eligibilityForExpressbuy', eligibility);
+    sessionStorage.setItem('eligibilityForExpressbuy', hasEnrolledInstrument);
     sessionStorage.setItem('userOperatingSystem', userOperatingSystem);
     sessionStorage.setItem('paymentRequestSupported', paymentRequestSupported);
     sessionStorage.setItem('hasEnrolledInstrument', hasEnrolledInstrument);
