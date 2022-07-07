@@ -17,7 +17,7 @@ function openPhonepeExpressbuy(ppeUrl, handleResponse, handleError) {
 }
 
 async function getExpressbuyResults(paymentRequestContext){
-    if(sessionStorage.getItem('eligibilityForExpressbuy') == null)
+    if(sessionStorage.getItem('eligibilityForExpressbuy') == null || sessionStorage.getItem('eligibilityForExpressbuy') == 'false')
         await warmupAndSaveResults(paymentRequestContext);
     return {
         'userOperatingSystem': sessionStorage.getItem('userOperatingSystem'),
@@ -56,7 +56,7 @@ async function warmupAndSaveResults(paymentRequestContext) {
         paymentRequestSupported = true;
         canMakePayment = await paymentRequestPhonepe.canMakePayment();
         startTime = performance.now();
-        while(canMakePayment == true && retries < 12 && hasEnrolledInstrument == false)
+        while(canMakePayment == true && retries < 9 && hasEnrolledInstrument == false)
         {
             hasEnrolledInstrument = await paymentRequestPhonepe.hasEnrolledInstrument()
             if(hasEnrolledInstrument) break;
