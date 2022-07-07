@@ -56,12 +56,14 @@ async function warmupAndSaveResults(paymentRequestContext) {
         paymentRequestSupported = true;
         canMakePayment = await paymentRequestPhonepe.canMakePayment();
         startTime = performance.now();
-        while(canMakePayment == true && retries < 9 && hasEnrolledInstrument == false)
+        var pageRetryLimit = 3;
+        while(canMakePayment == true && retries < 9 && hasEnrolledInstrument == false && pageRetryLimit > 0)
         {
             hasEnrolledInstrument = await paymentRequestPhonepe.hasEnrolledInstrument()
             if(hasEnrolledInstrument) break;
             paymentRequestPhonepe = createPhonepePaymentRequest(data);
             retries++;
+            pageRetryLimit--;
         }
         endTime = performance.now();
         var elapsedTime = endTime - startTime;
