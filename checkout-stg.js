@@ -17,7 +17,7 @@ function openPhonepeExpressbuy(ppeUrl, handleResponse, handleError) {
 }
 
 async function getExpressbuyResults(paymentRequestContext){
-    if(sessionStorage.getItem('eligibility') == null)
+    if(sessionStorage.getItem('eligibilityForExpressbuy') == null)
         await warmupAndSaveResults(paymentRequestContext);
     return {
         'userOperatingSystem': sessionStorage.getItem('userOperatingSystem'),
