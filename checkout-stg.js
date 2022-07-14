@@ -45,7 +45,7 @@ async function warmupAndSaveResults(paymentRequestContext) {
 
     var data = {
         url: "ppe://expressbuy",
-        constraints : paymentRequestContext.constraints
+        constraints : paymentRequestContext?.constraints ?? []
     }
     var paymentRequestPhonepe = createPhonepePaymentRequest(data);
     if(isAndroid && paymentRequestPhonepe != null)
