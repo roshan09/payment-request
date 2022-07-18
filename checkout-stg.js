@@ -1,6 +1,6 @@
 function createPhonepePaymentRequest(data){
     if (!window.PaymentRequest) return null;
-
+    console.log('loading stage payment request object');
     var paymentRequestPhonepe = new PaymentRequest([{
         supportedMethods: ["https://mercury-stg.phonepe.com/transact/checkout"],
         data: data
