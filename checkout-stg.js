@@ -33,7 +33,7 @@ async function getExpressbuyResults(paymentRequestContext){
 }
 
 async function warmupAndSaveResults(paymentRequestContext) {
-    var userOperatingSystem = navigator.userAgentData.platform;
+    var userOperatingSystem = navigator.userAgentData.platform ?? navigator.platform;
     var network = navigator.connection.effectiveType;
     var isAndroid = false;
     var paymentRequestSupported = false;
